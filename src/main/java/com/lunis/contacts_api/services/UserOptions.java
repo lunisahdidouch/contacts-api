@@ -9,7 +9,9 @@ import java.util.Scanner;
 public class UserOptions {
     static int option;
     static Scanner scanner = new Scanner(System.in);
-    static ContactManagementService service = new ContactManagementService();
+    static FileService fileService = new FileService();
+
+    static ContactManagementService service = new ContactManagementService(fileService);
 
     public UserOptions() {
         scanner = new Scanner(System.in);

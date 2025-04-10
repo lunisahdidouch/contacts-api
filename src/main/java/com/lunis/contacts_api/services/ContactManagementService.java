@@ -1,14 +1,25 @@
 package com.lunis.contacts_api.services;
 
 import com.lunis.contacts_api.models.Contact;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class ContactManagementService implements IContactManagementService{
     ArrayList<Contact> contacts = new ArrayList<>();
-    FileService fileService = new FileService();
+    IFileService fileService;
+
+    public ContactManagementService(IFileService fileService) {
+        this.fileService = fileService;
+        // Load initial contacts when the service is created
+        this.contacts = new ArrayList<>(this.fileService.readFromFile());
+        System.out.println("ContactManagementService created, loaded " + this.contacts.size() + " contacts.");
+    }
+
     @Override
     public void addContact(Contact newContact) {
         contacts.add(newContact);
@@ -23,6 +34,9 @@ public class ContactManagementService implements IContactManagementService{
 
     @Override
     public Contact searchContact(String name) {
+        if(name.length() > 5) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
         for(Contact contact : contacts) {
             if (Objects.equals(contact.getName(), name)) {
                 return contact;

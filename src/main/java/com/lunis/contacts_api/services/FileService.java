@@ -5,12 +5,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class FileService implements IFileService {
 
     @Override
@@ -33,7 +35,6 @@ public class FileService implements IFileService {
             } catch (IOException e) {
                 System.out.println("Error writing contacts file: " + e.getMessage());
             }
-
     }
 
     @Override

@@ -11,7 +11,6 @@ public class ContactsApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ContactsApiApplication.class, args);
 		welcomeMenu();
-
 	}
 
 }
